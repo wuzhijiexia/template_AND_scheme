@@ -1,0 +1,543 @@
+name: "ori-trainNet"
+
+layer {
+  name: "input"
+  type: "MemoryData"
+
+  top: "data"
+  top: "label"
+
+  memory_data_param{
+	channels: 3
+	height: 100
+	width: 100
+	batch_size: 64
+  }
+}
+
+layer {
+  name: "conv11"
+  type: "Convolution"
+  bottom: "data"
+  top: "conv11"
+
+param {
+    lr_mult: 1
+  }
+  param {
+    lr_mult: 2
+  }
+
+  convolution_param {
+    num_output: 32
+    kernel_size: 3
+    stride: 1
+	pad:1
+	engine: MKL2017
+
+    weight_filler {
+      type: "xavier"
+    }
+
+    bias_filler {
+      type: "constant"
+	  value: 0.1
+    }
+
+  }
+}
+
+layer {
+  name: "relu11"
+  type: "ReLU"
+  bottom: "conv11"
+  top: "conv11"
+  relu_param
+  {
+	engine: MKL2017
+  }
+}
+
+layer {
+  name: "conv12"
+  type: "Convolution"
+  bottom: "conv11"
+  top: "conv12"
+
+  param {
+	lr_mult: 1
+  }
+  param {
+    lr_mult: 2
+  }
+
+  convolution_param {
+    num_output: 64
+    kernel_size: 3
+    stride: 1
+	pad:1
+	engine: MKL2017
+
+    weight_filler {
+		type: "xavier"
+    }
+
+    bias_filler {
+		type: "constant"
+		value: 0.1
+    }
+   }
+
+}
+
+layer {
+  name: "relu12"
+  type: "ReLU"
+  bottom: "conv12"
+  top: "conv12"
+
+  relu_param
+  {
+	engine: MKL2017
+  }
+}
+
+layer {
+  name: "pool1"
+  type: "Pooling"
+  bottom: "conv12"
+  top: "pool1"
+
+  pooling_param {
+    pool: MAX
+    kernel_size: 2
+    stride: 2
+	engine: MKL2017
+  }
+}
+
+# 2
+layer {
+  name: "conv21"
+  type: "Convolution"
+  bottom: "pool1"
+  top: "conv21"
+
+param {
+    lr_mult: 1
+  }
+  param {
+    lr_mult: 2
+  }
+
+  convolution_param {
+    num_output: 64
+    kernel_size: 3
+    stride: 1
+	pad:1
+
+	engine: MKL2017
+    weight_filler {
+      type: "xavier"
+    }
+    bias_filler {
+      type: "constant"
+	  value: 0.1
+    }
+  }
+}
+
+layer {
+  name: "relu21"
+  type: "ReLU"
+  bottom: "conv21"
+  top: "conv21"
+
+  relu_param
+  {
+	engine: MKL2017
+  }
+}
+
+layer {
+  name: "conv22"
+  type: "Convolution"
+  bottom: "conv21"
+  top: "conv22"
+
+param {
+    lr_mult: 1
+  }
+  param {
+    lr_mult: 2
+  }
+
+  convolution_param {
+    num_output: 128
+    kernel_size: 3
+    stride: 1
+	pad:1
+	engine: MKL2017
+
+    weight_filler {
+      type: "xavier"
+    }
+
+    bias_filler {
+      type: "constant"
+	  value: 0.1
+    }
+  }
+}
+
+layer {
+  name: "relu22"
+  type: "ReLU"
+  bottom: "conv22"
+  top: "conv22"
+
+  relu_param
+  {
+	engine: MKL2017
+  }
+}
+
+layer {
+  name: "pool2"
+  type: "Pooling"
+  bottom: "conv22"
+  top: "pool2"
+
+  pooling_param {
+    pool: MAX
+    kernel_size: 2
+    stride: 2
+	engine: MKL2017
+  }
+}
+
+# 3
+layer {
+  name: "conv31"
+  type: "Convolution"
+  bottom: "pool2"
+  top: "conv31"
+
+param {
+    lr_mult: 1
+  }
+  param {
+    lr_mult: 2
+  }
+
+  convolution_param {
+    num_output: 96
+    kernel_size: 3
+    stride: 1
+	pad:1
+	engine: MKL2017
+
+    weight_filler {
+      type: "xavier"
+    }
+
+    bias_filler {
+      type: "constant"
+	  value: 0.1
+    }
+
+  }
+}
+
+layer {
+  name: "relu31"
+  type: "ReLU"
+  bottom: "conv31"
+  top: "conv31"
+
+  relu_param
+  {
+	engine: MKL2017
+  }
+}
+
+layer {
+  name: "conv32"
+  type: "Convolution"
+  bottom: "conv31"
+  top: "conv32"
+
+  param {
+    lr_mult: 1
+  }
+  param {
+    lr_mult: 2
+  }
+
+  convolution_param {
+    num_output: 192
+    kernel_size: 3
+    stride: 1
+	pad:1
+	engine: MKL2017
+
+    weight_filler {
+      type: "xavier"
+    }
+
+    bias_filler {
+      type: "constant"
+	  value: 0.1
+    }
+
+  }
+}
+
+layer {
+  name: "relu32"
+  type: "ReLU"
+  bottom: "conv32"
+  top: "conv32"
+  relu_param
+  {
+	engine: MKL2017
+  }
+}
+
+layer {
+  name: "pool3"
+  type: "Pooling"
+  bottom: "conv32"
+  top: "pool3"
+  pooling_param {
+    pool: MAX
+    kernel_size: 2
+    stride: 2
+	engine: MKL2017
+  }
+}
+
+# 4
+layer {
+  name: "conv41"
+  type: "Convolution"
+  bottom: "pool3"
+  top: "conv41"
+
+param {
+    lr_mult: 1
+  }
+  param {
+    lr_mult: 2
+  }
+
+  convolution_param {
+    num_output: 128
+    kernel_size: 3
+    stride: 1
+	pad:1
+	engine: MKL2017
+
+    weight_filler {
+      type: "xavier"
+    }
+
+    bias_filler {
+      type: "constant"
+	  value: 0.1
+    }
+
+  }
+}
+
+layer {
+  name: "relu41"
+  type: "ReLU"
+  bottom: "conv41"
+  top: "conv41"
+  relu_param
+  {
+	engine: MKL2017
+  }
+}
+
+layer {
+  name: "conv42"
+  type: "Convolution"
+  bottom: "conv41"
+  top: "conv42"
+
+param {
+    lr_mult: 1
+  }
+  param {
+    lr_mult: 2
+  }
+
+  convolution_param {
+    num_output: 256
+    kernel_size: 3
+    stride: 1
+	pad:1
+	engine: MKL2017
+
+    weight_filler {
+      type: "xavier"
+    }
+
+    bias_filler {
+      type: "constant"
+	  value: 0.1
+    }
+
+  }
+}
+
+layer {
+  name: "relu42"
+  type: "ReLU"
+  bottom: "conv42"
+  top: "conv42"
+  relu_param
+  {
+	engine: MKL2017
+  }
+}
+
+layer {
+  name: "pool4"
+  type: "Pooling"
+  bottom: "conv42"
+  top: "pool4"
+
+  pooling_param {
+    pool: MAX
+    kernel_size: 2
+    stride: 2
+	engine: MKL2017
+  }
+}
+
+## 5
+layer {
+  name: "conv51"
+  type: "Convolution"
+  bottom: "pool4"
+  top: "conv51"
+
+param {
+    lr_mult: 1
+  }
+  param {
+    lr_mult: 2
+  }
+
+  convolution_param {
+    num_output: 160
+    kernel_size: 3
+    stride: 1
+	pad:1
+	engine: MKL2017
+    weight_filler {
+      type: "xavier"
+    }
+    bias_filler {
+      type: "constant"
+	  value: 0.1
+    }
+  }
+}
+
+layer {
+  name: "relu51"
+  type: "ReLU"
+  bottom: "conv51"
+  top: "conv51"
+  relu_param
+  {
+	engine: MKL2017
+  }
+}
+
+layer {
+  name: "conv52"
+  type: "Convolution"
+  bottom: "conv51"
+  top: "conv52"
+
+param {
+    lr_mult: 1
+  }
+  param {
+    lr_mult: 2
+  }
+
+  convolution_param {
+    num_output: 320
+    kernel_size: 3
+    stride: 1
+	pad:1
+	engine: MKL2017
+    weight_filler {
+      type: "xavier"
+    }
+
+    bias_filler {
+      type: "constant"
+	  value: 0.1
+    }
+  }
+}
+
+# feature layer
+layer{
+	name: "pool5"
+	type: "Pooling"
+	bottom: "conv52"
+	top: "pool5"
+
+	pooling_param {
+		pool: AVE
+		kernel_size: 7
+		stride: 1
+		engine: MKL2017
+	}	
+}
+
+#########
+layer {
+  name: "output"
+  type: "InnerProduct"
+  bottom: "pool5"
+  top: "output"
+
+  param {
+    lr_mult: 1
+  }
+  param {
+    lr_mult: 2
+  }
+
+  inner_product_param {
+    num_output: 10575
+    weight_filler {
+      type: "xavier"
+    }
+    bias_filler {
+      type: "constant"
+	  value: 0
+    }
+  }
+}
+
+layer {
+  name: "loss"
+  type: "SoftmaxWithLoss"
+  bottom: "output"
+  bottom:"label"
+  top: "eLoss"
+
+  softmax_param {
+	engine:CAFFE
+  }
+}

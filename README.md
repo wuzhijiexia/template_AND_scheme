@@ -11,3 +11,10 @@
       `hi Constant ctermfg=blue`    #修改常量颜色
       `hi Statement ctermfg=darkyellow` #修改声明颜色
       `hi Identifier ctermfg=blue cterm=no`    #设置关键字为蓝色非粗体
+
+## Caffe Time SingleLayer
+    ❤ 测试网络层运行时间（通过random数据）
+      参考文件 - caffe.cpp, caffe.prototxt, caffe.sh
+    ❤ 测试网络层运行时间（通过MemoryData）
+      参考文件 - caffe_useMemoryData.cpp, xxx_useMemoryData.prototxt,
+      xxx_useMemoryData.sh
