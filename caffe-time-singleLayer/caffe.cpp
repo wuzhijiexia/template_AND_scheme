@@ -398,14 +398,14 @@ int time() {
   for (int i = 0; i < layers.size(); ++i) {
     const caffe::string& layername = layers[i]->layer_param().name();
     LOG(INFO) << std::setfill(' ') << std::setw(10) << layername <<
-      "\tforward: " << forward_time_per_layer[i] / 1000 /
+      "\tforward:  " << forward_time_per_layer[i] / 1000 /
       FLAGS_iterations << " ms.";
     LOG(INFO) << std::setfill(' ') << std::setw(10) << layername  <<
       "\tbackward: " << backward_time_per_layer[i] / 1000 /
       FLAGS_iterations << " ms.";
   }
   total_timer.Stop();
-  LOG(INFO) << "Average Forward pass: " << forward_time / 1000 /
+  LOG(INFO) << "Average Forward pass:  " << forward_time / 1000 /
     FLAGS_iterations << " ms.";
   LOG(INFO) << "Average Backward pass: " << backward_time / 1000 /
     FLAGS_iterations << " ms.";
